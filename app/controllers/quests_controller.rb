@@ -7,6 +7,20 @@ class QuestsController < ApplicationController
     @quest = Quest.new
   end
 
+  def edit
+    @quest = Quest.find(params[:id])
+  end
+
+  def update
+    @quest = Quest.find(params[:id])
+
+    if @quest.update(quest_params)
+      redirect_to @quest
+    else
+      render 'edit'
+    end
+  end
+
   def create
     @quest = Quest.new(quest_params)
 
