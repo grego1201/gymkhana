@@ -2,17 +2,21 @@
 
 <table>
   <tr>
+    <th>Id</th>
     <th>Title</th>
     <th>Text</th>
     <th>Code</th>
+    <th>Next quest ID</th>
     <th></th>
   </tr>
 
   <% @quests.each do |quest| %>
     <tr>
+      <td><%= quest.id %></td>
       <td><%= quest.title %></td>
       <td><%= quest.text %></td>
       <td><%= quest.code %></td>
+      <td><%= quest.next_quest_id %></td>
       <td><%= link_to 'Show', quest_path(quest) + '?admin=true' %></td>
       <td><%= link_to 'Edit', edit_quest_path(quest) %></td>
       <td><%= link_to 'Delete', quest_path(quest),
