@@ -32,6 +32,7 @@ class QuestsController < ApplicationController
   end
 
   def show
+    @admin_mode = params[:admin].to_s.downcase == 'true'
     @quest = Quest.find(params[:id])
   end
 
