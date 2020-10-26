@@ -4,6 +4,7 @@
   <tr>
     <th>Title</th>
     <th>Text</th>
+    <th>Code</th>
     <th></th>
   </tr>
 
@@ -11,6 +12,7 @@
     <tr>
       <td><%= quest.title %></td>
       <td><%= quest.text %></td>
+      <td><%= quest.code %></td>
       <td><%= link_to 'Show', quest_path(quest) + '?admin=true' %></td>
       <td><%= link_to 'Edit', edit_quest_path(quest) %></td>
       <td><%= link_to 'Delete', quest_path(quest),

@@ -1,4 +1,4 @@
 class Quest < ApplicationRecord
 
-  validates :title, :text, presence: true
+  validates :title, :text, :code, presence: true
 end

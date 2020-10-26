@@ -7,6 +7,17 @@
       <%= @quest.text %>
 </p>
 
+<%= form_with scope: :quest, url: quest_check_code_path(@quest), local: true do |form| %>
+  <p>
+    <%= form.label :code %><br>
+    <%= form.text_area :code, :value => '', :placeholder => 'Introduce el código'  %>
+  </p>
+
+  <p>
+    <%= form.submit 'Enviar código' %>
+  </p>
+<% end %>
+
 <% if @admin_mode %>
   <%= link_to 'Edit', edit_quest_path(@quest) %>
   <%= link_to 'Back', quests_path %>
