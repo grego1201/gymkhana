@@ -35,6 +35,13 @@ class QuestsController < ApplicationController
     @quest = Quest.find(params[:id])
   end
 
+  def destroy
+    @quest = Quest.find(params[:id])
+    @quest.destroy
+
+    redirect_to quests_path
+  end
+
   private
 
   def quest_params
