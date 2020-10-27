@@ -4,6 +4,7 @@ class QuestsController < ApplicationController
   end
 
   def new
+    @quests = Quest.all
     @quest = Quest.new
   end
 
@@ -48,7 +49,11 @@ class QuestsController < ApplicationController
     code = params[:quest][:code]
 
     if @quest.code == code
-      redirect_to quests_path
+      if @quest.next_quest_id
+        redirect_to quest_path(@quest.next_quest_id)
+      else
+        redirect_to quests_path
+      end
     else
       render 'show'
     end
@@ -57,6 +62,10 @@ class QuestsController < ApplicationController
   private
 
   def quest_params
-    params.require(:quest).permit(:title, :text, :code)
+    permitted_params = params.require(:quest).permit(:title, :text, :code)
+    next_quest_id = params[:quest][:next_quest_id]
+    permitted_params[:next_quest] = Quest.find(next_quest_id) unless next_quest_id.empty?
+
+    permitted_params
   end
 end
