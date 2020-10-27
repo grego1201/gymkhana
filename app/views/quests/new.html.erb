@@ -39,7 +39,7 @@
 
   <p>
     <%= form.label :next_quest %><br>
-    <%= form.collection_select :next_quest_id, Quest.order(:name), :id, :title, include_blank: true %>
+    <%= form.collection_select :next_quest_id, Quest.order(:title), :id, :title, include_blank: true %>
   </p>
 
   <p>
