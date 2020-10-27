@@ -1,7 +1,7 @@
 <h1>New quest</h1>
 
 
-<%= form_with scope: :quest, url: quests_path, local: true do |form| %>
+<%= form_with(model: @quest, local: true) do |form| %>
 
   <% if @quest.errors.any? %>
     <div id="error_explanation">
@@ -30,6 +30,11 @@
   <p>
     <%= form.label :code %><br>
     <%= form.text_area :code %>
+  </p>
+
+  <p>
+    <%= form.label :end_quest_text %><br>
+    <%= form.text_area :end_quest_text %>
   </p>
 
   <p>

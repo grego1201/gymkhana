@@ -33,6 +33,11 @@
   </p>
 
   <p>
+    <%= form.label :end_quest_text %><br>
+    <%= form.text_area :end_quest_text %>
+  </p>
+
+  <p>
     <%= form.label :next_quest %><br>
     <%= form.collection_select :next_quest_id, Quest.order(:name), :id, :title, include_blank: true %>
   </p>

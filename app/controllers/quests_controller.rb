@@ -33,6 +33,7 @@ class QuestsController < ApplicationController
   end
 
   def show
+    @show_end = params[:show_end].to_s.downcase == 'true'
     @admin_mode = params[:admin].to_s.downcase == 'true'
     @quest = Quest.find(params[:id])
   end
@@ -49,10 +50,10 @@ class QuestsController < ApplicationController
     code = params[:quest][:code]
 
     if @quest.code == code
-      if @quest.next_quest_id
-        redirect_to quest_path(@quest.next_quest_id)
+      if @quest.next_quest_id.nil?
+        redirect_to quest_path(@quest) + '?show_end=true'
       else
-        redirect_to quests_path
+        redirect_to quest_path(@quest.next_quest_id)
       end
     else
       render 'show'
@@ -62,7 +63,7 @@ class QuestsController < ApplicationController
   private
 
   def quest_params
-    permitted_params = params.require(:quest).permit(:title, :text, :code)
+    permitted_params = params.require(:quest).permit(:title, :text, :code, :end_quest_text, :next_quest_id)
     next_quest_id = params[:quest][:next_quest_id]
     permitted_params[:next_quest] = Quest.find(next_quest_id) unless next_quest_id.empty?
 
