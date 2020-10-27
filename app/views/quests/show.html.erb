@@ -2,18 +2,24 @@
     <strong>Title:</strong>
       <%= @quest.title %>
 </p>
-<p>
-    <strong>Text:</strong>
-      <%= @quest.text %>
-</p>
 
-<%= form_with scope: :quest, url: quest_check_code_path(@quest), local: true do |form| %>
+<% if @show_end %>
+  <strong>Mensaje:</strong>
+  <%= @quest.end_quest_text %>
+<% else %>
   <p>
-    <%= form.label :code %><br>
-    <%= form.text_area :code, :value => '', :placeholder => 'Introduce el código'  %>
+    <strong>Text:</strong>
+    <%= @quest.text %>
   </p>
+<% end %>
 
-  <% unless @admin_mode %>
+<% unless @admin_mode || @show_end %>
+  <%= form_with scope: :quest, url: quest_check_code_path(@quest), local: true do |form| %>
+    <p>
+      <%= form.label :code %><br>
+      <%= form.text_area :code, :value => '', :placeholder => 'Introduce el código'  %>
+    </p>
+
     <p>
       <%= form.submit 'Enviar código' %>
     </p>
@@ -23,8 +29,16 @@
 <% if @admin_mode %>
   <p>
     <p>
+      <strong>Code:</strong>
+      <%= @quest.code %>
+    </p>
+    <p>
       <strong>Next quest title:</strong>
       <%= @quest.next_quest&.title %>
+    </p>
+    <p>
+      <strong>End quest title:</strong>
+      <%= @quest.end_quest_text %>
     </p>
   </p>
   <%= link_to 'Edit', edit_quest_path(@quest) %>
