@@ -1,46 +1,61 @@
-<p>
-    <strong>Title:</strong>
-      <%= @quest.title %>
-</p>
-
-<% if @show_end %>
-  <strong>Mensaje:</strong>
-  <%= @quest.end_quest_text %>
-<% else %>
+<div style='display:bock; text-align:center; font-size:250%; font-family: "Helvetica Neue";'>
   <p>
-    <strong>Text:</strong>
-    <%= @quest.text %>
+    <strong>Título:</strong>
+    <div style="font-size: 100%">
+      <%= @quest.title %>
+    </div>
   </p>
-<% end %>
+  <br>
 
-<% unless @admin_mode || @show_end %>
-  <%= form_with scope: :quest, url: quest_check_code_path(@quest), local: true do |form| %>
+  <% if @show_end %>
+    <strong>Mensaje:</strong>
+    <div style="font-size: 100%">
+      <%= @quest.end_quest_text %>
+    </div>
+  <% else %>
     <p>
-      <%= form.label :code %><br>
-      <%= form.text_area :code, :value => '', :placeholder => 'Introduce el código'  %>
-    </p>
-
-    <p>
-      <%= form.submit 'Enviar código' %>
+      <strong>Descripción:</strong>
+      <div style="font-size: 100%">
+        <%= @quest.text %>
+      </div>
     </p>
   <% end %>
-<% end %>
+  <br>
 
-<% if @admin_mode %>
-  <p>
+  <% unless @admin_mode || @show_end %>
+    <%= form_with scope: :quest, url: quest_check_code_path(@quest), local: true do |form| %>
+
+      <div style="margin-left:auto; margin-right:auto; display: block">
+        <p>
+          <%= form.label :Código %><br>
+          <%= form.text_area :code, :value => '', :placeholder => 'Introduce el código'%>
+        </p>
+        <p>
+          <%= form.submit 'Enviar código',
+            style: 'background-color: #DDDDDD; align-items: flex-start;
+            border-color: transparent; border-style: solid;
+            border-radius: 14px; font-size: 80%' %>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if @admin_mode %>
     <p>
-      <strong>Code:</strong>
-      <%= @quest.code %>
+      <p>
+        <strong>Código:</strong>
+        <%= @quest.code %>
+      </p>
+      <p>
+        <strong>Next quest title:</strong>
+        <%= @quest.next_quest&.title %>
+      </p>
+      <p>
+        <strong>End quest title:</strong>
+        <%= @quest.end_quest_text %>
+      </p>
     </p>
-    <p>
-      <strong>Next quest title:</strong>
-      <%= @quest.next_quest&.title %>
-    </p>
-    <p>
-      <strong>End quest title:</strong>
-      <%= @quest.end_quest_text %>
-    </p>
-  </p>
-  <%= link_to 'Edit', edit_quest_path(@quest) %>
-  <%= link_to 'Back', quests_path %>
-<% end %>
+    <%= link_to 'Edit', edit_quest_path(@quest) %>
+    <%= link_to 'Back', quests_path %>
+  <% end %>
+</div>
