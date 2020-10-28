@@ -36,6 +36,11 @@ class QuestsController < ApplicationController
     @show_end = params[:show_end].to_s.downcase == 'true'
     @admin_mode = params[:admin].to_s.downcase == 'true'
     @quest = Quest.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def destroy
