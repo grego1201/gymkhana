@@ -15,14 +15,18 @@
 
 <% unless @admin_mode || @show_end %>
   <%= form_with scope: :quest, url: quest_check_code_path(@quest), local: true do |form| %>
-    <p>
-      <%= form.label :code %><br>
-      <%= form.text_area :code, :value => '', :placeholder => 'Introduce el código'  %>
-    </p>
+    <div class="input-group mb-3">
+      <p>
+        <%= form.label :code %><br>
+        <%= form.text_area :code, :value => '', :placeholder => 'Introduce el código', class: 'form-control' %>
+      </p>
 
-    <p>
-      <%= form.submit 'Enviar código' %>
-    </p>
+      <br />
+      <br />
+      <p>
+        <%= form.submit 'Enviar código', class: 'btn' %>
+      </p>
+    </div>
   <% end %>
 <% end %>
 
